@@ -2,13 +2,10 @@
 
 import psycopg2
 
-def getVizUsage(): 
-  # DB Conn Config
-  server = "RepositoryURL.exammple.com"
-  secert = ""
+def getVizUsage(repository, secert): 
 
   # Connect to your postgres DB
-  conn = psycopg2.connect(dbname = "workgroup", user = "readonly", password = secret, host = server, port = "8060")
+  conn = psycopg2.connect(dbname = "workgroup", user = "readonly", password = secret, host = repository, port = "8060")
 
   # Open a cursor to perform database operations
   cur = conn.cursor()
