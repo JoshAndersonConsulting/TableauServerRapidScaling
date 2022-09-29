@@ -18,9 +18,10 @@ def create_tableau_connection(username, password):
     server.version = '3.11'
     return server, tableau_auth
 
-server, tableau_auth = create_tableau_connection(USERNAME, PASSWORD)
-with server.auth.sign_in(tableau_auth):
-    URL = BaseURL+"/admin/systeminfo.xml"
-    response = requests.get(URL, verify=False)
-    with open(File, 'wb') as file:
-        file.write(response.content)
+def getxml(BaseURL, USERNAME, PASSWORD, File)
+    server, tableau_auth = create_tableau_connection(USERNAME, PASSWORD)
+    with server.auth.sign_in(tableau_auth):
+        URL = BaseURL+"/admin/systeminfo.xml"
+        response = requests.get(URL, verify=False)
+        with open(File, 'wb') as file:
+            file.write(response.content)
