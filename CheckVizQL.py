@@ -14,7 +14,7 @@ def getVizUsage():
   cur = conn.cursor()
 
   # VizQL Query
-  Query = "SELECT     date(created_at),     date_part('hour',created_at) as hour,     floor(date_part('minute',created_at)/15) as minute,     Min(created_at),     Max(Created_at),     Count(distinct Hist_Actor_User_ID) as users,     Count(distinct worker) as nodes From     Historical_Events Where     Hist_Actor_User_ID is not null     and worker is not null     and Created_At >= NOW() - INTERVAL '24 HOURS' group by     date,     hour,     minute;"
+  Query = "SELECT     date(created_at),     date_part('hour',created_at) as hour,     floor(date_part('minute',created_at)/15) as minute,     Min(created_at),     Max(Created_at),     Count(distinct Hist_Actor_User_ID) as users,     Count(distinct worker) as nodes From     Historical_Events Where     Hist_Actor_User_ID is not null     and worker is not null     and Created_At >= NOW() - INTERVAL '1 HOURS' group by     date,     hour,     minute;"
 
   # Execute a query
   cur.execute(Query)
