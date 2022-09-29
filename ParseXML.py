@@ -5,28 +5,31 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 from datetime import datetime as dt
 
-column_names = ["created", "machine_name", "external", "service", "worker", "status", "preferred"]
-rows =[]
-now = dt.now()
+def parsexml(file): 
+    column_names = ["created", "machine_name", "external", "service", "worker", "status", "preferred"]
+    rows =[]
+    now = dt.now()
 
-mytree = ET.parse('systeminfo.xml')
-myroot = mytree.getroot()
+    mytree = ET.parse(file)
+    myroot = mytree.getroot()
 
-for machine in myroot.find('machines'):
-    name = machine.attrib['name']
-    external = machine.attrib['external']
+    for machine in myroot.find('machines'):
+        name = machine.attrib['name']
+        external = machine.attrib['external']
 
-    for services in machine:
-        #print(services.tag, services.attrib)
-        service = services.tag
-        worker = services.attrib['worker']
-        status = services.attrib['status']
-        try:
-            preferred = services.attrib['preferred']
-        except:
-            preferred = ""
+        for services in machine:
+            #print(services.tag, services.attrib)
+            service = services.tag
+            worker = services.attrib['worker']
+            status = services.attrib['status']
+            try:
+                preferred = services.attrib['preferred']
+            except:
+                preferred = ""
 
-        row = [now, name, external, service, worker, status, preferred]
-        rows.append(row)
+            row = [now, name, external, service, worker, status, preferred]
+            rows.append(row)
 
-system_status = pd.DataFrame(rows, columns=column_names)
+    system_status = pd.DataFrame(rows, columns=column_names)
+    
+    return system_status
